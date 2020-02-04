@@ -20,16 +20,16 @@ th{ text-align: center;}
 td{ text-align: left; }
 
 </style>
-
+    <p class="h1" align="center">Events</p>
 <body>
 {% if events %}
-    <p class="h1" align="center">Eventos</p>
+
 
     <form id="filter_day" action="/events/" method="get" style ='float: left; padding: 5px;'>
-        <button type="submit" name="today" value="true" class="btn btn-primary">ONLY Today's Events</button>
+        <button type="submit" name="today" value="true" class="btn btn-primary">All today's events</button>
     </form>
     <form id="show_all" action="/events/" method="get" style ='float: left; padding: 5px;'>
-        <button type="submit"  name="" value="" class="btn btn-primary">Show All</button>
+        <button type="submit"  name="all" value="true" class="btn btn-primary">Show all</button>
     </form>
 <div class="table-responsive">
     <table class="table">
@@ -48,16 +48,16 @@ td{ text-align: left; }
                     <td>{{i.name}}</td>
                     <td>{{i.speaker}}</td>
                     <td>{{i.place}}</td>
-                    <td>{{i.start_time}}</td>
+                    <td>{{i.start_time|time}}</td>
                     <td><form id="acrredit" action="/events/" method="get">
-                        <button style="margin-left: 35%" type="submit" name="id" value="{{i.id}}" class="btn btn-primary btn-sm">Info</button>
+                        <button type="submit" name="id" value="{{i.id}}" class="btn btn-primary btn-sm">Info</button>
                          </form></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
-{% else %}
+{% elif select_event %}
 
 <div class="card" style="margin-top: 50px;">
   <div class="card-header">
@@ -75,6 +75,8 @@ td{ text-align: left; }
   </div>
 </div>
 
+{% else %}
+    <h2>No hay eventos</h2>
 {% endif %}
 
 
