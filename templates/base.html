@@ -7,18 +7,24 @@
 
 </head>
 
+
 <nav class="navbar navbar-expand-md">
-  <a class="navbar-brand" href="#">ICIT 2020 - Accreditation System</a>
-  <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="main-navigation">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/events" >Events</a>
-      </li>
-    </ul>
-  </div>
+      <a class="navbar-brand" href="#">ICIT 2020 - Accreditation System</a>
+      <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        {% if user.username %}
+      <div class="collapse navbar-collapse" id="main-navigation">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/events" >Events</a>
+          </li>
+          <li><h5> {{ user.username }} </h5></li>
+          <li><a class="nav-link" href="/accounts/logout" >Logout</a></li>
+        </ul>
+      </div>
+        {% endif %}
+
 </nav>
 
 <style>

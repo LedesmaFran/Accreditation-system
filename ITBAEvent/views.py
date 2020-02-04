@@ -8,6 +8,8 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 
 def show_events(request):
+    if not request.user.is_authenticated:
+        return redirect('home')
     if request.GET.get('id'):
         id_event = request.GET.get('id')
         select_event = Event.objects.get(id=id_event)

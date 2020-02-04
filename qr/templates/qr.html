@@ -8,38 +8,39 @@
     <title>Acreditacion QR</title>
 </head>
 <body>
-<style>
-    canvas {
-        display: none;
-    }
-    hr {
-        margin-top: 32px;
-    }
-    input[type="file"] {
-        display: block;
-        margin-bottom: 16px;
-    }
-    div {
-        margin-bottom: 16px;
-        border: black;
-    }
-</style>
-<h1 align="center">Event: {{event}} </h1>
-<h2 style="margin-left: 5%">Scan QR Code</h2>
-<div>
-  <!--  <b>Device has camera: </b>
-    <span id="cam-has-camera"></span>
-    <br>-->
-    <video muted playsinline id="qr-video" style="margin-left: 5%"></video>
+    <style>
+        canvas {
+            display: none;
+        }
+        hr {
+            margin-top: 32px;
+        }
+        input[type="file"] {
+            display: block;
+            margin-bottom: 16px;
+        }
+        div {
+            margin-bottom: 16px;
+            border: black;
+        }
+    </style>
 
-</div>
-<div>
+    <h1 align="center">Event: {{event}} </h1>
+    <h2 style="margin-left: 5%">Scan QR Code</h2>
+    <div>
+      <!--  <b>Device has camera: </b>
+        <span id="cam-has-camera"></span>
+        <br>-->
+        <video muted playsinline id="qr-video" style="margin-left: 5%"></video>
 
+    </div>
+    <div>
+
+        <br>
+    </div>
+
+    <span id="cam-qr-result" hidden>None</span>
     <br>
-</div>
-
-<span id="cam-qr-result" hidden>None</span></h2>
-<br>
 
 
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
