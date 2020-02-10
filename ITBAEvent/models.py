@@ -32,17 +32,31 @@ class Event(models.Model):
         AULA140 = '140', 'Annex Building. Forth Floor: Classroom 140'
         AULA152 = '152', 'Annex Building. Fifth Floor: Classroom 152'
 
-    name            = models.CharField(max_length = 200, default = '')
-    description     = models.TextField(max_length = 1000, default = '')
-    speaker         = models.CharField(max_length = 200, default = '')
-    place           = models.CharField(max_length = 100,
-                                       choices = PossiblePlaces.choices,
-                                       default = PossiblePlaces.AULA012)
-    start_time      = models.DateTimeField('Start Time')
-    end_time        = models.DateTimeField('End Time')
+    name = models.CharField(max_length=200, default='')
+    description = models.TextField(max_length=1000, default='')
+    speaker = models.CharField(max_length=200, default='')
+    place = models.CharField(max_length=100,
+                             choices=PossiblePlaces.choices,
+                             default=PossiblePlaces.AULA012)
+    start_time = models.DateTimeField('Start Time')
+    end_time = models.DateTimeField('End Time')
+    registered = models.ManyToManyField('participant')
+    accredit = models.ManyToManyField('participant', related_name='accredited', blank=True)
 
     class Meta:
         ordering = ['start_time']
 
     def __str__(self):
         return self.name
+
+
+class participant(models.Model):
+    first_name = models.CharField(max_length=200, default='')
+    last_name = models.CharField(max_length=200, default='')
+    email = models.EmailField(blank=True)
+    company = models.CharField(max_length=200, default='', blank=True)
+    title = models.CharField(max_length=200, default='', blank=True)
+    speaker = models.BooleanField()
+
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name

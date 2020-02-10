@@ -36,54 +36,90 @@
             <form id="show_all" action="/events/" method="get" style ='float: left; padding: 5px;'>
                 <button type="submit"  name="all" value="true" class="btn btn-primary">Show all</button>
             </form>
-        <div class="table-responsive">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Event</th>
-                        <!--<th scope="col">Speaker</th>-->
-                        <th scope="col">Place</th>
-                        <th scope="col">Start Time</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in events %}
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="thead-dark">
                         <tr>
-                            <td>{{i.name}}</td>
-                            <!--<td>{{i.speaker}}</td>-->
-                            <td>{{i.place}}</td>
-                            <td>{{i.start_time|time}}</td>
-                            <td><form id="acrredit" action="/events/" method="get">
-                                <button type="submit" name="id" value="{{i.id}}">
-                                    <span class="glyphicon glyphicon-info-sign"></span>
-                                </button>
-                                 </form></td>
+                            <th scope="col">Event</th>
+                            <!--<th scope="col">Speaker</th>-->
+                            <th scope="col">Place</th>
+                            <th scope="col">Start Time</th>
+                            <th scope="col">Action</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        {% for i in events %}
+                            <tr>
+                                <td>{{i.name}}</td>
+                                <!--<td>{{i.speaker}}</td>-->
+                                <td>{{i.place}}</td>
+                                <td>{{i.start_time|time}}</td>
+                                <td><form id="acrredit" action="/events/" method="get">
+                                    <button type="submit" name="id" value="{{i.id}}">
+                                        <span class="glyphicon glyphicon-info-sign"></span>
+                                    </button>
+                                     </form></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         {% elif select_event %}
 
-        <div class="card" style="margin-top: 50px;">
-          <div class="card-header">
-              <strong>Event Info</strong>
-          </div>
-          <div class="card-body">
-            <h2 class="card-title">{{select_event.name}}</h2>
-            <p class="card-text"><li><strong>Description:</strong> {{select_event.description}}</li>
-            <li><strong>speaker:</strong> {{select_event.speaker}}</li>
-            <li><strong>place:</strong> {{select_event.place}}</li>
-            <li><strong>start time:</strong> {{select_event.start_time}}</li></p>
-            <button type="button" class="glyphicon glyphicon-arrow-left" onClick="javascript:history.go(-1); ">
-                Return
-            </button>
-            <form id="acrredit" action="/events/" method="get">
-                <button type="submit" name="accredit" value="{{select_event.id}}" class="btn btn-primary btn-lg" style ='margin-top: 15px;'>Scan QR to Accredit !</button>
-            </form>
-          </div>
-        </div>
+            <div class="card" style="margin-top: 50px;">
+              <div class="card-header">
+                  <strong>Event Info</strong>
+              </div>
+              <div class="card-body">
+                <h2 class="card-title">{{select_event.name}}</h2>
+                <p class="card-text"><li><strong>Description:</strong> {{select_event.description}}</li>
+                <li><strong>speaker:</strong> {{select_event.speaker}}</li>
+                <li><strong>place:</strong> {{select_event.place}}</li>
+                <li><strong>start time:</strong> {{select_event.start_time}}</li></p>
+                <button type="button" class="glyphicon glyphicon-arrow-left" onClick="javascript:history.go(-1); ">
+                    Return
+                </button>
+                <form id="acrredit" action="/events/" method="get">
+                    <button type="submit" name="accredit" value="{{select_event.id}}" class="btn btn-primary btn-lg" style ='margin-top: 15px;'>Scan QR to Accredit !</button>
+                </form>
+              </div>
+            </div>
+            <h3>Already accredited: {{ select_event.accredit.all|length }}</h3>
+
+            <div class="table-responsive">
+                <table class="table" style="width: 40%">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Registered</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for person in select_event.registered.all %}
+                            <tr>
+                                <td>{{person}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive">
+                <table class="table" style="width: 40%">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Accredited</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for person in select_event.accredit.all %}
+                            <tr>
+                                <td>{{person}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
 
         {% else %}
             <h2>No hay eventos</h2>
