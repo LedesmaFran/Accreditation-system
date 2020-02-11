@@ -41,7 +41,6 @@
     <br>
 
 
-
 <script type="module">
     import QrScanner from "{% static 'qr-scanner.min.js' %}";
     QrScanner.WORKER_PATH = "{% static 'qr-scanner-worker.min.js' %}";
@@ -56,16 +55,38 @@
     function setResult(label, result) {
         label.textContent = result;
         //console.log(result)
+        var registered_list = false;
+        var accredited_list=false;
+
         {% for person in event.registered.all %}
             if({{ person.id }} == result)
             {
                 document.write("{{ person }} ESTA REGISTRADO!!");
-                console.log("{{ person }} ESTA REGISTRADO!!");
+                $.post("", {'cam_read': result});
+                window.location.href = "{{person.id}}/ok/"
+                registered_list = true;
             }
         {% endfor %}
 
-        scanner.destroy();
+        if(registered_list===false)
+        {
+            {% for person in event.accredit.all %}
+                if({{ person.id }} == result)
+                {
+                    document.write("{{ person }} YA ESTA ACREDITADO DE ANTES!!");
+                    window.location.href = "{{person.id}}/accredited/"
+                    accredited_list = true;
+                }
+            {% endfor %}
+        }
 
+        if(registered_list===false && accredited_list===false)
+        {
+             document.write("{{ person }} No puede ingresar!!");
+             window.location.href = "no/"
+        }
+
+        scanner.destroy();
 
 
       //  scanner.destroy();
