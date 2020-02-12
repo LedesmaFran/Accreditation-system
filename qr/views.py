@@ -23,17 +23,18 @@ def qr_reader(request, id_event):
 def ok(request, id_event, id_user):
     if not request.user.is_authenticated:
         return redirect('home')
-    print(id_user)
-    return render(request, "ok.html")
+    person = participant.objects.get(id=id_user)
+    return render(request, "ok.html", {"person": person, "id_event": id_event})
 
 
 def accredited(request, id_event, id_user):
     if not request.user.is_authenticated:
         return redirect('home')
     person = participant.objects.get(id=id_user)
-    return render(request, "accredited.html", {"person": person})
+    return render(request, "accredited.html", {"person": person, "id_event": id_event})
 
-def no(request,id_event):
+
+def no(request, id_event):
     if not request.user.is_authenticated:
         return redirect('home')
-    return render(request, "no.html")
+    return render(request, "no.html", {"id_event": id_event})

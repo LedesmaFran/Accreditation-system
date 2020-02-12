@@ -1,24 +1,18 @@
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>OK</title>
 </head>
+{% block content %}
 
-<style>
-    body {
-  padding: 0;
-  margin: 0;
-  background-color: green;
-}
-</style>
 
-<body>
-    <h1>First name: {{ person.first_name }}</h1>
-    <h1>Last name: {{ person.last_name }}</h1>
-    {% if person.speaker %}
-        <h1>Is speaker!</h1>
-    {% endif %}
-</body>
-</html>
+    <body>
+        <h1>Accredited successfully</h1>
+        <h1>First name: {{ person.first_name }}</h1>
+        <h1>Last name: {{ person.last_name }}</h1>
+        {% if person.speaker %}
+            <h1>Is speaker!</h1>
+        {% endif %}
+    </body>
+{% endblock %}
